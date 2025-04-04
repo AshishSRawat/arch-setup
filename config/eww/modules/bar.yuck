@@ -1,0 +1,23 @@
+(include "modules/bar/leftbar.yuck")
+(include "modules/bar/rightbar.yuck")
+
+(defvar bar_enabled false) 
+
+(defwindow bar
+    :monitor 0
+    :geometry (geometry
+        :x "0%"
+        :y "0%"
+        :width "100%"
+        :anchor "top center")
+    :stacking "fg"
+    :exclusive "false"
+    :namespace "bar"
+    (bar))
+
+(defwidget bar []
+    (box    :orientation "h"
+            :visible bar_enabled
+        (leftbar)   ;toolbar
+        (rightbar)  ;statusbar
+))

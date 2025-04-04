@@ -1,0 +1,12 @@
+[manager]
+cwd = { fg = "#2F6992", bold = true, italic = true}
+
+[mode]
+normal_main = { fg = "#0b0f15", bg = "#234e6d", bold = true }
+normal_alt = { fg = "#2F6992", bg = "#0b0f15", bold = true }
+
+select_main = { fg = "#0b0f15", bg = "#2F6992", bold = true }
+select_alt = { fg = "#2F6992", bg = "#0b0f15", bold = true }
+
+unset_main = { fg = "#0b0f15", bg = "#2F6992", bold = true }
+unset_alt = { fg = "#2F6992", bg = "#0b0f15", bold = true }

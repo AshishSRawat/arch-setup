@@ -1,0 +1,18 @@
+#####################
+### STYLE OPTIONS ###
+#####################
+
+font=Fira Sans 16pt weight=normal style=normal
+
+background-color=#0b0f15A0
+text-color=#c2c3c4
+border-color=#5598AE
+border-radius=10
+text-alignment=center
+
+anchor=top-center
+width=300
+height=200
+max-icon-size=32
+
+default-timeout=10000

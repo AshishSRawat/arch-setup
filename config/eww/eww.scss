@@ -1,0 +1,8 @@
+* {
+  all: unset;
+}
+
+@import '/home/user/.cache/wal/colors.scss';
+@import 'scss/bar';
+@import 'scss/bar/leftbar';
+@import 'scss/bar/rightbar';

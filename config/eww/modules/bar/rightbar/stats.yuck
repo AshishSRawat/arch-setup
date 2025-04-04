@@ -1,0 +1,65 @@
+;; VARIABLES
+
+(defpoll fan    :interval "2s"
+    `cat /sys/class/hwmon/hwmon3/fan1_input`)
+
+(deflisten volume :initial 50
+    `scripts/volume.sh`)
+
+(deflisten muted :initial "no"
+    `scripts/muted.sh`)
+
+(deflisten network  :initial '{"ssid":"lo", "signal":""}'
+    `scripts/network.sh`)
+
+;; WIDGETS
+(defwidget stat [icon val]
+    (box    :class "stat"
+            :orientation "h"
+            :space-evenly "false"
+            :halign "end"
+        (label :class "icon" :justify "left" :text icon) 
+        (label :justify "right" :text val)))
+
+(defwidget statbar []
+    (box    :class "statbar"
+            :orientation "h"
+            :space-evenly "false"
+            :halign "end"
+        (stat :icon "󰻠" :val "${round(EWW_CPU.avg,0)}%")
+        (stat   :icon "${EWW_TEMPS.THINKPAD_CPU < 30 ? "" :
+                        EWW_TEMPS.THINKPAD_CPU < 50 ? "" :
+                        EWW_TEMPS.THINKPAD_CPU < 70 ? "" :
+                        EWW_TEMPS.THINKPAD_CPU < 85 ? "" : ""
+                        }"
+                :val "${EWW_TEMPS.CORETEMP_CORE_0} ${EWW_TEMPS.CORETEMP_CORE_1} ${EWW_TEMPS.CORETEMP_CORE_2} ${EWW_TEMPS.CORETEMP_CORE_3}")
+        (stat   :icon "" :val "${round(EWW_RAM.available_mem / powi(2,30), 1)}G")
+        (stat   :icon "󰋊" :val "${round(EWW_DISK['/'].free / powi(2,30),0)}G")
+        (stat   :icon "󰈐" :val "${fan}")
+        (stat   :icon { muted == "yes" ? "" :
+                        volume < 26 ? "" : 
+                        volume < 51 ? "" : 
+                        volume < 76 ? "󰕾" : ""}
+                :val "${volume}%")
+        (stat   :icon "${network.ssid == "lo" || network.ssid == "" ? "󰤭" : 
+                        network.signal > 80 ? "󰤨" : 
+                        network.signal > 60 ? "󰤥" :
+                        network.signal > 40 ? "󰤢" :
+                        network.signal > 20 ? "󰤟" : "󰤯"}"
+                :val "${network.ssid}")
+        ))
+
+(defvar show-stats true)
+(defwidget stats []
+    (eventbox   :onmiddleclick "eww update show-stats=${!show-stats}"
+        (box    :class "system"
+                :orientation "h"
+                :halign "end"
+                :space-evenly false
+            (revealer   :reveal show-stats
+                        :transition "slideright"
+                (statbar))
+            (label  :visible {!show-stats}
+                    :class "icon" 
+                    :text '${show-stats ? "󰨇" : "󰨇"}')
+            )))

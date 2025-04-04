@@ -1,0 +1,13 @@
+(include "modules/bar/rightbar/stats.yuck")
+
+;;VARIABLES
+(defpoll time :interval "1s"
+    "date '+%H:%M:%S %a %b %d'")
+
+(defwidget rightbar []
+    (box    :class "rightbar"
+            :orientation "h"
+            :space-evenly "false"
+            :halign "end"
+        (stats)
+        (label :text time)))

@@ -1,0 +1,32 @@
+(defvar stopwatch-start false)
+(defvar toggle-stopwatch-display false)
+(defvar pause-time "00:00:00.0")
+
+(defpoll timer-str :interval "100ms"
+                  :initial-value zero-time
+                  :run-while stopwatch-start
+    `scripts/stopwatch.sh poll`)
+
+(deflisten stopwatch-active
+    `scripts/stopwatcher.sh active`)
+
+
+(defwidget stopwatch-display []
+    (button :visible toggle-stopwatch-display
+            :class "stopwatch-display"
+            :onclick "eww update stopwatch-start=${!stopwatch-start}"
+            :onclick { stopwatch-start ?
+                "eww update stopwatch-start=false pause-time=${timer-str}; scripts/stopwatch.sh stop" :
+                "eww update stopwatch-start=true; scripts/stopwatch.sh start" }
+            :onrightclick { 
+                "eww update stopwatch-start=false pause-time='00:00:00.0' && scripts/stopwatch.sh reset"} 
+      (label :text "${stopwatch-active ? timer-str : pause-time}")))
+
+(defwidget stopwatch []
+    (eventbox   :halign "start"
+                :onmiddleclick "eww update toggle-stopwatch-display=${!toggle-stopwatch-display}"
+        (box    :class "stopwatch"
+            (stopwatch-display)
+            (label  :visible {!toggle-stopwatch-display}
+                    :class "stopwatch-icon" 
+                    :text "" ))))

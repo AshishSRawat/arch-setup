@@ -1,0 +1,35 @@
+.workspaces {
+  background-color: rgba($color2, .25); 
+}
+
+.workspace {
+  color: $color10;
+  border-style: solid;
+  min-width: 1.6em;
+
+  &.current {
+    background-color: $color10;
+    color: $color0;
+  }
+  &.special {
+    color: $color14;
+  }
+}
+
+.stopwatch {
+  background-color: rgba($color5, .4);
+  color: $color12;
+}
+
+.stopwatch-display {
+  padding: 0em 0.5em 0em 0.5em;
+}
+
+.stopwatch-icon {
+  font-size: 18;
+  padding: 0em 0.75em 0em 0.5em;
+}
+
+.message {
+  color: $color15;
+}

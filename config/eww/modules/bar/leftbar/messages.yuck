@@ -1,0 +1,9 @@
+(deflisten msg-text :initial ""
+    `scripts/messages.sh`)
+
+(defwidget message []
+    (label  :class "message"
+            :text msg-text
+            :unindent true
+            :justify "left"
+            :halign "start"))

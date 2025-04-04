@@ -1,0 +1,14 @@
+(include "modules/bar/leftbar/stopwatch.yuck")
+(include "modules/bar/leftbar/workspaces.yuck")
+(include "modules/bar/leftbar/messages.yuck")
+
+(defwidget leftbar []
+    (box    :class "leftbar"
+            :orientation "h"
+            :halign "start"
+            :space-evenly false
+            :spacing 8
+        (workspaces)
+        (stopwatch)
+        (message)
+        ))

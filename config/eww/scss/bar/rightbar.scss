@@ -1,0 +1,48 @@
+.rightbar {
+  color: $color15;
+}
+
+.rightbar label:last-child {
+  padding-left: 0.6em;
+  padding-right: 0.5em;
+}
+
+
+.stat {
+  border-right: solid 2;
+  padding-left: 0.4em;
+}
+
+.stat label:first-child {
+  padding-right: 0.1em;
+}
+
+.stat label:last-child {
+  padding-right: 0.4em;
+}
+
+.icon {
+  font-size: 18;
+}
+
+.statbar {
+}
+
+.statbar .stat:last-child {
+  border-right: solid 0;
+
+  & label:last-child {
+    padding-right: 0em;
+  }
+}
+
+.system {
+  background-color: rgba($color6, .3);
+  color: $color14;
+  padding-right: 0.4em;
+}
+
+.system * {
+  border-color: rgba($color6, .8);
+  border-radius: 0;
+}
